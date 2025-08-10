@@ -71,6 +71,8 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); }
+
 	UPROPERTY(VisibleAnywhere,Category="Character | Interaction")
 	TScriptInterface<IInteractionInterface> TargetInteractable;
 
