@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/InteractionInterface.h"
 #include "Logging/LogMacros.h"
 #include "InventorySystemCharacter.generated.h"
 
@@ -14,6 +15,24 @@ class UInputAction;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
+
+
+USTRUCT()
+struct FInteractionData
+{
+	GENERATED_BODY()
+
+	FInteractionData() : CurrentInteractable( nullptr ),LastInteractionChecekTime( 0.0f )
+	{
+		
+	};
+
+	UPROPERTY()
+	AActor* CurrentInteractable;
+UPROPERTY()
+	float LastInteractionChecekTime;
+};
+
 
 UCLASS(config=Game)
 class AInventorySystemCharacter : public ACharacter
@@ -27,7 +46,7 @@ class AInventorySystemCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FollowCamera;
-	
+
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* DefaultMappingContext;
@@ -46,26 +65,44 @@ class AInventorySystemCharacter : public ACharacter
 
 public:
 	AInventorySystemCharacter();
-	
+
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
-protected:
+	UPROPERTY(VisibleAnywhere,Category="Character | Interaction")
+	TScriptInterface<IInteractionInterface> TargetInteractable;
 
+	float InteractionCheckFrequency;
+
+	float InteractionCheckDistance;
+
+	FTimerHandle TimerHandle_Interaction;
+
+	FInteractionData InteractionData;
+
+
+	void PerformInteractionCheck();
+	void FoundInteractable(AActor* NewInteractable);
+	void NoInteractableFound();
+	void BeginInteraction();
+	void EndInteraction();
+	void Interact();
+
+	
+	virtual void Tick(float DeltaSeconds) override;
+	
+protected:
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
+
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
+
 	// To add mapping context
 	virtual void BeginPlay();
-
-
 };
-

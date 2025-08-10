@@ -54,11 +54,6 @@ AInventorySystemCharacter::AInventorySystemCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
-void AInventorySystemCharacter::BeginPlay()
-{
-	// Call the base class  
-	Super::BeginPlay();
-}
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -92,6 +87,47 @@ void AInventorySystemCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 }
+
+
+
+void AInventorySystemCharacter::PerformInteractionCheck()
+{
+	InteractionData.LastInteractionChecekTime = GetWorld()->GetTimeSeconds();
+
+	FVector TraceStart(FVector::ZeroVector);
+	
+}
+
+void AInventorySystemCharacter::FoundInteractable(AActor* NewInteractable)
+{
+}
+
+void AInventorySystemCharacter::NoInteractableFound()
+{
+}
+
+void AInventorySystemCharacter::BeginInteraction()
+{
+}
+
+void AInventorySystemCharacter::EndInteraction()
+{
+}
+
+void AInventorySystemCharacter::Interact()
+{
+}
+
+void AInventorySystemCharacter::BeginPlay()
+{  
+	Super::BeginPlay();
+}
+
+void AInventorySystemCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+}
+
 
 void AInventorySystemCharacter::Move(const FInputActionValue& Value)
 {
