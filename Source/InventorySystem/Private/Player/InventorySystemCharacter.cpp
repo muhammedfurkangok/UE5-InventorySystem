@@ -147,25 +147,84 @@ void AInventorySystemCharacter::FoundInteractable(AActor* NewInteractable)
 {
 	if(IsInteracting())
 	{
-		
+		EndInteraction();
 	}
-	
+
+	if(InteractionData.CurrentInteractable)
+	{
+		TargetInteractable = InteractionData.CurrentInteractable;
+		TargetInteractable->EndFocus();
+	}
+		
+	InteractionData.CurrentInteractable = NewInteractable;
+	TargetInteractable = NewInteractable;
+
+	TargetInteractable->BeginFocus();
 }
 
 void AInventorySystemCharacter::NoInteractableFound()
 {
+	if(IsInteracting())
+	{
+		GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+	}
+
+	if(InteractionData.CurrentInteractable)
+	{
+		if(IsValid(TargetInteractable.GetObject()))
+		{
+			TargetInteractable->EndFocus();
+		}
+	}
+
+	// widger hide on hud
+
+	InteractionData.CurrentInteractable = nullptr;
+	TargetInteractable = nullptr;
 }
 
 void AInventorySystemCharacter::BeginInteraction()
 {
+	PerformInteractionCheck();
+	
+	if(InteractionData.CurrentInteractable)
+	{
+		if(IsValid(TargetInteractable.GetObject()))
+		{
+			TargetInteractable->BeginInteract();
+
+			if(FMath::IsNearlyZero(TargetInteractable->InteractableData.InteractionDuration, 0.1f))
+			{
+				Interact();
+			}
+			else
+			{
+				GetWorldTimerManager().SetTimer(TimerHandle_Interaction, this, &AInventorySystemCharacter::Interact,
+				                               TargetInteractable->InteractableData.InteractionDuration, false);
+			}
+		}
+	}
 }
 
 void AInventorySystemCharacter::EndInteraction()
 {
+
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+	
+	if(IsValid(TargetInteractable.GetObject()))
+	{
+		TargetInteractable->EndInteract();
+	}
 }
 
 void AInventorySystemCharacter::Interact()
 {
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+	
+	if(IsValid(TargetInteractable.GetObject()))
+	{
+		TargetInteractable->Interact();
+	}
 }
 
 void AInventorySystemCharacter::BeginPlay()
