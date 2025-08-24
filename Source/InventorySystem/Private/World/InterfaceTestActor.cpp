@@ -44,7 +44,7 @@ void AInterfaceTestActor::EndFocus()
 
 void AInterfaceTestActor::BeginInteract()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Begin Interact with %s"), *GetName());
+	// UE_LOG(LogTemp, Warning, TEXT("Begin Interact with %s"), *GetName());
 }
 
 void AInterfaceTestActor::EndInteract()
@@ -52,7 +52,7 @@ void AInterfaceTestActor::EndInteract()
 	UE_LOG(LogTemp, Warning, TEXT("End Interact with %s"), *GetName());
 }
 
-void AInterfaceTestActor::Interact()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Interact with %s"), *GetName());
-}
+// void AInterfaceTestActor::Interact()
+// {
+// 	UE_LOG(LogTemp, Warning, TEXT("Interact with %s"), *GetName());
+// }
