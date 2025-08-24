@@ -67,15 +67,15 @@ AInventorySystemCharacter::AInventorySystemCharacter()
 
 void AInventorySystemCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	// // Add Input Mapping Context
-	// if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
-	// {
-	// 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<
-	// 		UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
-	// 	{
-	// 		Subsystem->AddMappingContext(DefaultMappingContext, 0);
-	// 	}
-	// }
+	// Add Input Mapping Context
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<
+			UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		}
+	}
 
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
