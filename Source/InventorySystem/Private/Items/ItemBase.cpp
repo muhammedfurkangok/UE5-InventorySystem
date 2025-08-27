@@ -29,13 +29,13 @@ void UItemBase::SetQuantatiy(const int32 NewQuantity)
 	{
 		Quantity = FMath::Clamp(NewQuantity, 1, ItemNumericData.bIsStackable ? ItemNumericData.MaxStackSize : 1);
 
-		// if(OwningInventory)
-		// {
-		// 	if(quantity <= 0)
-		// 	{
-		// 		owningInventory->RemoveItem(this);
-		// 	}
-		// }
+		if(OwningInventory)
+		{
+			if(quantity <= 0)
+			{
+				owningInventory->RemoveItem(this);
+			}
+		}
 	}
 }
 

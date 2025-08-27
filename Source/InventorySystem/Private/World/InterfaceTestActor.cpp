@@ -52,7 +52,7 @@ void AInterfaceTestActor::EndInteract()
 	UE_LOG(LogTemp, Warning, TEXT("End Interact with %s"), *GetName());
 }
 
-void AInterfaceTestActor::Interact()
+void AInterfaceTestActor::Interact(AInventorySystemCharacter* PlayerCharacter)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Interact with %s"), *GetName());
 }
