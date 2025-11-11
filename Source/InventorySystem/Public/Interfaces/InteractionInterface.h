@@ -7,6 +7,8 @@
 #include "InteractionInterface.generated.h"
 
 
+class AInventorySystemCharacter;
+
 UENUM()
 enum EInteractableType : uint8
 {
@@ -63,7 +65,7 @@ public:
 	virtual void EndFocus();
 	virtual void BeginInteract();
 	virtual void EndInteract();
-	virtual void Interact(AInventorySystemCharacter* PlayerCharacter);
+	virtual auto Interact(AInventorySystemCharacter* PlayerCharacter) -> void;
 
 	FInteractableData InteractableData;
 };

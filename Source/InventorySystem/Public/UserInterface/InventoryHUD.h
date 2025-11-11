@@ -8,17 +8,17 @@
 class UInteractionWidget;
 class UMainMenu;
 
-/**
- * 
- */
+
 UCLASS()
 class INVENTORYSYSTEM_API AInventoryHUD : public AHUD
 {
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditDefaultsOnly, Category = "Widgets")
-	TSubclassOf<UMainMenu> MainMenuClass;
+	// UPROPERTY(EditDefaultsOnly, Category = "Widgets")
+	// TSubclassOf<UMainMenu> MainMenuClass;
+
+	
 
 	UPROPERTY(EditDefaultsOnly, Category = "Widgets")
 	TSubclassOf<UInteractionWidget> InteractionWidgetClass;
@@ -34,8 +34,8 @@ public:
 	void HideInteractionWidget();
 	void UpdateInteractionWidget(const FInteractableData InteractableData);
 
-	UPROPERTY();
-	UMainMenu* MainMenuWidget;
+	// UPROPERTY();
+	// UMainMenu* MainMenuWidget;
 
 	UPROPERTY();
 	UInteractionWidget* InteractionWidget;
