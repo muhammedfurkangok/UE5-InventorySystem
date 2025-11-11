@@ -1,12 +1,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MainMenu.h"
 #include "GameFramework/HUD.h"
+#include "Interaction/InteractionWidget.h"
 #include "Interfaces/InteractionInterface.h"
 #include "InventoryHUD.generated.h"
-
-class UInteractionWidget;
-class UMainMenu;
 
 
 UCLASS()
@@ -15,8 +14,8 @@ class INVENTORYSYSTEM_API AInventoryHUD : public AHUD
 	GENERATED_BODY()
 
 public:
-	// UPROPERTY(EditDefaultsOnly, Category = "Widgets")
-	// TSubclassOf<UMainMenu> MainMenuClass;
+	UPROPERTY(EditDefaultsOnly, Category = "Widgets")
+	TSubclassOf<UMainMenu> MainMenuClass;
 
 	
 
@@ -34,13 +33,14 @@ public:
 	void HideInteractionWidget();
 	void UpdateInteractionWidget(const FInteractableData InteractableData);
 
-	// UPROPERTY();
-	// UMainMenu* MainMenuWidget;
+protected:
+	virtual void BeginPlay() override;
+	UPROPERTY();
+	UMainMenu* MainMenuWidget;
 
 	UPROPERTY();
 	UInteractionWidget* InteractionWidget;
 	
-	void BeginPlay() override;
 };
 
 

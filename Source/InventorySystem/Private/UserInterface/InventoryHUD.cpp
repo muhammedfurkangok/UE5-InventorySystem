@@ -9,16 +9,16 @@ void AInventoryHUD::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// if (MainMenuClass)
-	// {
-	// 	MainMenuWidget = CreateWidget<UMainMenu>(GetWorld(), MainMenuClass);
-	// 	if (MainMenuWidget)
-	// 	{
-	// 		MainMenuWidget->AddToViewport();
-	// 		MainMenuWidget->SetVisibility(ESlateVisibility::Hidden);
-	// 		bIsMenuVisible = false;
-	// 	}
-	// }
+	if (MainMenuClass)
+	{
+		MainMenuWidget = CreateWidget<UMainMenu>(GetWorld(), MainMenuClass);
+		if (MainMenuWidget)
+		{
+			MainMenuWidget->AddToViewport();
+			MainMenuWidget->SetVisibility(ESlateVisibility::Hidden);
+			bIsMenuVisible = false;
+		}
+	}
 	
 }
 
