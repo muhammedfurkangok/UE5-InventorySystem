@@ -25,8 +25,8 @@ struct FInteractableData
 	GENERATED_BODY()
 
 	FInteractableData() : InteractableType(EInteractableType::Pickup),
-	Name(FText::FromString("Default Item")),
-	Action(FText::FromString("Pick Up")),
+	NameText(FText::FromString("Default Item")),
+	ActionText(FText::FromString("Pick Up")),
 	Quantity(1),
 	InteractionDuration(1.0f) {};
 	
@@ -34,10 +34,10 @@ struct FInteractableData
 	TEnumAsByte<EInteractableType> InteractableType;
 
 	UPROPERTY(EditInstanceOnly)
-	FText Name;
+	FText NameText;
 	
 	UPROPERTY(EditInstanceOnly)
-	FText Action;
+	FText ActionText;
 
 	UPROPERTY(EditInstanceOnly)
 	int8 Quantity;

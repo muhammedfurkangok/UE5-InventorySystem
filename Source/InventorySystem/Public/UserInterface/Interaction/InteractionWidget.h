@@ -20,7 +20,7 @@ public:
 	UPROPERTY(VisibleAnywhere, Category="Ineraction Widget | Player Reference")
 	AInventorySystemCharacter* PlayerCharacter;
 
-	void UpdateWidget(const FInteractableData* InteractableData);
+	void UpdateWidget(const FInteractableData* InteractableData) const;
 
 protected:
 	UPROPERTY(VisibleAnywhere, meta=(BindWidget), Category="Ineteraction Widget | Interactable Data")
