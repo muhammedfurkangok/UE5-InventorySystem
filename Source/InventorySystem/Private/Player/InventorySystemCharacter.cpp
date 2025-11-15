@@ -1,5 +1,6 @@
 //game
 #include "Player/InventorySystemCharacter.h"
+#include "UserInterface/InventoryHUD.h"
 
 //engine
 #include "Engine/LocalPlayer.h"
@@ -164,6 +165,8 @@ void AInventorySystemCharacter::FoundInteractable(AActor* NewInteractable)
 	InteractionData.CurrentInteractable = NewInteractable;
 	TargetInteractable = NewInteractable;
 
+	InventoryHUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
+
 	TargetInteractable->BeginFocus();
 }
 
@@ -183,6 +186,7 @@ void AInventorySystemCharacter::NoInteractableFound()
 	}
 
 	// widger hide on hud
+	InventoryHUD->HideInteractionWidget();
 
 	InteractionData.CurrentInteractable = nullptr;
 	TargetInteractable = nullptr;
@@ -235,6 +239,8 @@ void AInventorySystemCharacter::Interact()
 void AInventorySystemCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	InventoryHUD = Cast<AInventoryHUD>(GetWorld()->GetFirstPlayerController()->GetHUD());
 }
 
 void AInventorySystemCharacter::Tick(float DeltaSeconds)
