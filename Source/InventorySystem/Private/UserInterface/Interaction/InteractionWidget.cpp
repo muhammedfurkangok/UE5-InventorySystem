@@ -25,36 +25,36 @@ void UInteractionWidget::UpdateWidget(const FInteractableData* InteractableData)
 {
 	switch (InteractableData->InteractableType)
 	{
-	case EInteractableType::Pickup:
-		KeyPressText->SetText(FText::FromString("E"));
-		InteractionProgressBar->SetVisibility(ESlateVisibility::Collapsed);
-
-		if (InteractableData->Quantity < 2)
-		{
-			QuantityText->SetVisibility(ESlateVisibility::Collapsed);
-		}
-		else
-		{
-			QuantityText->SetText(FText::Format((NSLOCTEXT("InteractionWidget", "QuantityText", "x{0}{1}")),
-			                                    InteractableData->Quantity));
-		}
-		break;
-	case EInteractableType::NonPlayerCharacter:
-		break;
-	case EInteractableType::Device:
-		break;
-	case EInteractableType::Toggle:
-		break;
-	case EInteractableType::Container:
-		break;
-	default:
-		break;
+		case EInteractableType::Pickup:
+			KeyPressText->SetText(FText::FromString("Press"));
+			InteractionProgressBar->SetVisibility(ESlateVisibility::Collapsed);
+	
+			if (InteractableData->Quantity < 2)
+			{
+				QuantityText->SetVisibility(ESlateVisibility::Collapsed);
+			}
+			else
+			{
+				QuantityText->SetText(FText::Format((NSLOCTEXT("InteractionWidget", "QuantityText", "x{0}{1}")),
+				                                    InteractableData->Quantity));
+				QuantityText->SetVisibility(ESlateVisibility::Visible);
+			}
+			break;
+		case EInteractableType::NonPlayerCharacter:
+			break;
+		case EInteractableType::Device:
+			break;
+		case EInteractableType::Toggle:
+			break;
+		case EInteractableType::Container:
+			break;
+		default:
+			break;
 	}
 
 	ActionText->SetText(InteractableData->ActionText);
 	NameText->SetText(InteractableData->NameText);
-	
-}
+	}
 
 float UInteractionWidget::UpdateInteractionProgress()
 {

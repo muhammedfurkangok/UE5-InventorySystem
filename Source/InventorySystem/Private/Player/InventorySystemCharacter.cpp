@@ -183,13 +183,14 @@ void AInventorySystemCharacter::NoInteractableFound()
 		{
 			TargetInteractable->EndFocus();
 		}
+		// widger hide on hud
+		InventoryHUD->HideInteractionWidget();
+
+		InteractionData.CurrentInteractable = nullptr;
+		TargetInteractable = nullptr;
 	}
 
-	// widger hide on hud
-	InventoryHUD->HideInteractionWidget();
-
-	InteractionData.CurrentInteractable = nullptr;
-	TargetInteractable = nullptr;
+	
 }
 
 void AInventorySystemCharacter::BeginInteraction()
