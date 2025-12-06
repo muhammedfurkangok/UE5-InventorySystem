@@ -7,6 +7,7 @@
 #include "Interfaces/InteractionInterface.h"
 #include "InventoryHUD.generated.h"
 
+class UInteractionWidget;
 
 UCLASS()
 class INVENTORYSYSTEM_API AInventoryHUD : public AHUD
