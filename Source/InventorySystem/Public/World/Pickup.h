@@ -55,6 +55,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void Interact(AInventorySystemCharacter* PlayerCharacter) override;
+	void UpdateInteractableData();
 
 	void TakePickup(const AInventorySystemCharacter* Taker);
 };
