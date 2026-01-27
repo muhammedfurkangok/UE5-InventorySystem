@@ -17,8 +17,8 @@ class INVENTORYSYSTEM_API UItemBase : public UObject
 public:
 
 	//Properties&Variables
-	// UPROPERTY()
-	// UInventoryComponent* OwningInventory;
+	UPROPERTY()
+	UInventoryComponent* OwningInventory;
 	
 	UPROPERTY(VisibleAnywhere,Category="Item")
 	int32 Quantity;
@@ -52,7 +52,7 @@ public:
 	FORCEINLINE bool IsFullItemStack() const {return  Quantity == ItemNumericData.MaxStackSize; };
 	
 	UFUNCTION(Category= "Item")
-	void SetQuantatiy(const int32 NewQuantity);
+	void SetQuantity(const int32 NewQuantity);
 	
 	UFUNCTION(Category= "Item")
 	virtual void Use(AInventorySystemCharacter* Character);
