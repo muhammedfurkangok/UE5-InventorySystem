@@ -122,10 +122,50 @@ int32 UInventoryComponent::HandleStackableItems(const TObjectPtr<UItemBase>& Ite
 FItemAddResult UInventoryComponent::HandleAddItem(const TObjectPtr<UItemBase>& InputItem)
 {
 	
+	const int32 InitialRequestedAddAmount = InputItem->Quantity;
+
+	// handle non-stackable items
+	if (!InputItem->ItemNumericData.bIsStackable)
+	{
+		return HandleNonStackableItems(InputItem);
+	}
+
+	// handle stackable
+	const int32 StackableAmountAdded = HandleStackableItems(InputItem, InitialRequestedAddAmount);
+
+	if (StackableAmountAdded == InitialRequestedAddAmount)
+	{
+		return FItemAddResult::AddedAll(InitialRequestedAddAmount, FText::Format(
+											FText::FromString("Successfully added {0} {1} to the inventory."),
+											InitialRequestedAddAmount,
+											InputItem->ItemTextData.ItemName));
+	}
+
+	if (StackableAmountAdded < InitialRequestedAddAmount && StackableAmountAdded > 0)
+	{
+		return FItemAddResult::AddedPartial(StackableAmountAdded, FText::Format(
+												FText::FromString("Partial amount of {0} added to the inventory. Number added = {1}"),
+												InputItem->ItemTextData.ItemName,
+												StackableAmountAdded));
+	}
+
+	if (StackableAmountAdded <= 0)
+	{
+		return FItemAddResult::AddedNone(FText::Format(
+			FText::FromString("Couldn't add {0} to the inventory. No remaining inventory slots, or invalid item."),
+			InputItem->ItemTextData.ItemName));
+	}
+
 	return FItemAddResult::AddedNone(FText::FromString("TryAddItem fallthrough error."));
 }
 
+
 void UInventoryComponent::AddNewItem(const TObjectPtr<UItemBase>& Item, const int32 AmountToAdd)
 {
-	
+	UItemBase* NewItem = UItemBase::CreateItemCopy(Item, this);
+	NewItem->SetQuantity(AmountToAdd);
+	InventoryContents.Add(NewItem);
+	InventoryTotalWeight += NewItem->GetItemStackWeight();
+	InventoryWasUpdated.Broadcast();
 }
+

@@ -1,6 +1,7 @@
 #include "World/Pickup.h"
 
 #include "Items/ItemBase.h"
+#include "Player/InventorySystemCharacter.h"
 #include "UserInterface/Inventory/InventoryPanel.h"
 
 APickup::APickup()
@@ -35,7 +36,7 @@ void APickup::InitializePickup(const TSubclassOf<UItemBase> BaseClass, const int
 		ItemReference->ItemTextData = ItemData->ItemTextData;
 		ItemReference->ItemAssetData = ItemData->ItemAssetData;
 
-		InQuantity <= 0 ? ItemReference->SetQuantatiy(1) : ItemReference->SetQuantatiy(InQuantity);
+		InQuantity <= 0 ? ItemReference->SetQuantity(1) : ItemReference->SetQuantity(InQuantity);
 
 		PickUpMesh->SetStaticMesh(ItemData->ItemAssetData.Mesh);
 	}
@@ -96,7 +97,10 @@ void APickup::TakePickup(const AInventorySystemCharacter* Taker)
 	{
 		if(ItemReference)
 		{
-			// if(UInventoryComponent* )
+			if(UInventoryComponent* PlayerInventory = Taker->GetPlayerInventory())
+			{
+				
+			}
 		}
 	}
 }

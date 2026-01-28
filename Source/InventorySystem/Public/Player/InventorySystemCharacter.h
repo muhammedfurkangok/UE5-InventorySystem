@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/InventoryComponent.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/InteractionInterface.h"
 #include "Logging/LogMacros.h"
@@ -81,8 +82,13 @@ public:
 
 	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); }
 
+	FORCEINLINE UInventoryComponent* GetPlayerInventory() const { return PlayerInventory; }
+
 	UPROPERTY(VisibleAnywhere,Category="Character | Interaction")
 	TScriptInterface<IInteractionInterface> TargetInteractable;
+
+	UPROPERTY(VisibleAnywhere,Category="Character | Inventory")
+	UInventoryComponent* PlayerInventory;
 
 	float InteractionCheckFrequency;
 
