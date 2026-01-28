@@ -100,6 +100,7 @@ public:
 	
 	FORCEINLINE TArray<UItemBase*> GetInventoryContents() const { return InventoryContents; }
 
+
 	
 	FORCEINLINE void SetSlotsCapacity(const int32 NewSlotsCapacity) { ItemSlotCount = NewSlotsCapacity; }
 	FORCEINLINE void SetWeightCapacity(const float NewWeightCapacity) { MaxWeightCapacity = NewWeightCapacity; }

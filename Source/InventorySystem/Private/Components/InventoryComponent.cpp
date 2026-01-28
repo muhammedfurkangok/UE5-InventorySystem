@@ -107,6 +107,8 @@ void UInventoryComponent::SplitExistingStack(UItemBase* ItemIn, const int32 Amou
 	}
 }
 
+
+
 FItemAddResult UInventoryComponent::HandleNonStackableItems(const TObjectPtr<UItemBase>& InputItem)
 {
 	return FItemAddResult::AddedNone(FText::FromString("HandleNonStackableItems not yet implemented."));
@@ -114,8 +116,7 @@ FItemAddResult UInventoryComponent::HandleNonStackableItems(const TObjectPtr<UIt
 
 int32 UInventoryComponent::HandleStackableItems(const TObjectPtr<UItemBase>& ItemIn, const int32 RequestedAddAmount)
 {
-
-
+	
 	return 0;
 }
 
@@ -168,4 +169,5 @@ void UInventoryComponent::AddNewItem(const TObjectPtr<UItemBase>& Item, const in
 	InventoryTotalWeight += NewItem->GetItemStackWeight();
 	InventoryWasUpdated.Broadcast();
 }
+
 

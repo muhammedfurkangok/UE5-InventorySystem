@@ -46,7 +46,7 @@ void APickup::InitializePickup(const TSubclassOf<UItemBase> BaseClass, const int
 void APickup::InitializeDrop(UItemBase* ItemToDrop, const int32 InQuantity)
 {
 	ItemReference = ItemToDrop;
-	InQuantity <= 0 ? ItemReference->SetQuantatiy(1) : ItemReference->SetQuantatiy(InQuantity);
+	InQuantity <= 0 ? ItemReference->SetQuantity(1) : ItemReference->SetQuantity(InQuantity);
 	ItemReference->ItemNumericData.Weight = ItemToDrop->GetItemSingleWeight();
 	PickUpMesh->SetStaticMesh(ItemToDrop->ItemAssetData.Mesh);
 
@@ -93,14 +93,39 @@ void APickup::Interact(AInventorySystemCharacter* PlayerCharacter)
 
 void APickup::TakePickup(const AInventorySystemCharacter* Taker)
 {
-	if(IsPendingKillEnabled())
+	if (!IsPendingKillPending())
 	{
-		if(ItemReference)
+		if (ItemReference)
 		{
-			if(UInventoryComponent* PlayerInventory = Taker->GetPlayerInventory())
+			if (UInventoryComponent* PlayerInventory = Taker->GetPlayerInventory())
 			{
-				
+				const FItemAddResult AddResult = PlayerInventory->HandleAddItem(ItemReference);
+
+				switch (AddResult.OperationResult)
+				{
+				case EItemAddResult::IAR_NoItemAdded:
+					break;
+				case EItemAddResult::IAR_PartialAmountItemAdded:
+					UpdateInteractableData();
+					Taker->UpdateInteractionWidget();
+					break;
+				case EItemAddResult::IAR_AllItemAdded:
+					Destroy();
+					break;
+				default:
+					break;
+				}
+
+				UE_LOG(LogTemp, Warning, TEXT("%s"), *AddResult.ResultMessage.ToString());
 			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Player inventory component is null!"));
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Pickup internal item reference was somehow null!"));
 		}
 	}
 }

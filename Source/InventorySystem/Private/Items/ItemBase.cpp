@@ -8,21 +8,22 @@ UItemBase::UItemBase()
 {
 }
 
-UItemBase* UItemBase::CreateItemCopy() const
+UItemBase* CreateItemCopy(const UItemBase* ItemToCopy, UObject* NewOuter)
 {
-	UItemBase* ItemCopy = NewObject<UItemBase>(StaticClass());
+	UItemBase* ItemCopy = NewObject<UItemBase>(NewOuter, StaticClass());
 
-	ItemCopy->ID = this->ID;
-	ItemCopy->Quantity = this->Quantity;
-	ItemCopy->ItemQuality = this->ItemQuality;
-	ItemCopy->ItemType = this->ItemType;
-	ItemCopy->ItemTextData = this->ItemTextData;
-	ItemCopy->ItemNumericData = this->ItemNumericData;
-	ItemCopy->ItemStatistics = this->ItemStatistics;
-	ItemCopy->ItemAssetData = this->ItemAssetData;
+	ItemCopy->ID = ItemToCopy->ID;
+	ItemCopy->Quantity = ItemToCopy->Quantity;
+	ItemCopy->ItemQuality = ItemToCopy->ItemQuality;
+	ItemCopy->ItemType = ItemToCopy->ItemType;
+	ItemCopy->ItemTextData = ItemToCopy->ItemTextData;
+	ItemCopy->ItemNumericData = ItemToCopy->ItemNumericData;
+	ItemCopy->ItemStatistics = ItemToCopy->ItemStatistics;
+	ItemCopy->ItemAssetData= ItemToCopy->ItemAssetData;
 
 	return ItemCopy;
 }
+
 
 void UItemBase::SetQuantity(const int32 NewQuantity)
 {

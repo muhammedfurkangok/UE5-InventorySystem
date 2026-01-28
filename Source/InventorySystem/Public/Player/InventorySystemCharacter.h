@@ -84,6 +84,9 @@ public:
 
 	FORCEINLINE UInventoryComponent* GetPlayerInventory() const { return PlayerInventory; }
 
+	void UpdateInteractionWidget() const;
+
+
 	UPROPERTY(VisibleAnywhere,Category="Character | Interaction")
 	TScriptInterface<IInteractionInterface> TargetInteractable;
 

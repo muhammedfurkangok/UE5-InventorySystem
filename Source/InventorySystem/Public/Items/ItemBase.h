@@ -40,7 +40,7 @@ public:
 	//Functions
 	UItemBase();
 
-	UItemBase* CreateItemCopy() const;
+	UItemBase* CreateItemCopy(const UItemBase* ItemToCopy, UObject* NewOuter) const;
 
 	UFUNCTION(Category= "Item")
 	FORCEINLINE float GetItemStackWeight() const {return  Quantity * ItemNumericData.Weight; };

@@ -50,6 +50,10 @@ AInventorySystemCharacter::AInventorySystemCharacter()
 
 	// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+	
+	PlayerInventory->SetSlotsCapacity(20);
+	PlayerInventory->SetWeightCapacity(50.0f);
+	
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	// Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
@@ -60,6 +64,14 @@ AInventorySystemCharacter::AInventorySystemCharacter()
 	InteractionCheckFrequency = 0.1f;
 	InteractionCheckDistance = 225.0f;
 	BaseEyeHeight = 75.0f;
+}
+
+void AInventorySystemCharacter::UpdateInteractionWidget() const
+{
+	if(IsValid(TargetInteractable->_getUObject()))
+	{
+		InventoryHUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
+	}
 }
 
 
