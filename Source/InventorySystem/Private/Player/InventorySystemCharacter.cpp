@@ -61,6 +61,10 @@ AInventorySystemCharacter::AInventorySystemCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
+	PlayerInventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("PlayerInventory"));
+	PlayerInventory->SetSlotsCapacity(20);
+	PlayerInventory->SetWeightCapacity(50.0f);
+
 	InteractionCheckFrequency = 0.1f;
 	InteractionCheckDistance = 225.0f;
 	BaseEyeHeight = 75.0f;

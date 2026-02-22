@@ -10,7 +10,7 @@ UItemBase::UItemBase()
 
 UItemBase* CreateItemCopy(const UItemBase* ItemToCopy, UObject* NewOuter)
 {
-	UItemBase* ItemCopy = NewObject<UItemBase>(NewOuter, StaticClass());
+	UItemBase* ItemCopy = NewObject<UItemBase>(NewOuter, ItemToCopy->GetClass());
 
 	ItemCopy->ID = ItemToCopy->ID;
 	ItemCopy->Quantity = ItemToCopy->Quantity;
