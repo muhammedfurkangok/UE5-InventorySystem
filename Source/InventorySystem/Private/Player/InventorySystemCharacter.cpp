@@ -78,6 +78,21 @@ void AInventorySystemCharacter::UpdateInteractionWidget() const
 	}
 }
 
+void AInventorySystemCharacter::DropItem(UItemBase* ItemToDrop, const int32 QuantityToDrop)
+{
+	if(PlayerInventory->FindMatchingItem(ItemToDrop))
+	{
+		FActorSpawnParameters SpawnParameters;
+		SpawnParameters.Owner = this;
+		SpawnParameters.bNoFail = true;
+		SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+		const FVector SpawnLocation = GetActorLocation() + (GetActorForwardVector() * 50.0f);
+
+		const FTransform SpawnTransform(GetActorRotation(), SpawnLocation);
+	}
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -100,6 +115,8 @@ void AInventorySystemCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+
+		PlayerInputComponent->BindAction("ToggleMenu", IE_Pressed, this, &AInventorySystemCharacter::ToggleMeun);
 
 		//Interact
 		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this,&AInventorySystemCharacter::BeginInteraction);
@@ -124,6 +141,11 @@ void AInventorySystemCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 	}
 }
 
+
+void AInventorySystemCharacter::ToggleMeun()
+{
+	InventoryHUD->ToggleMenu();
+}
 
 void AInventorySystemCharacter::PerformInteractionCheck()
 {

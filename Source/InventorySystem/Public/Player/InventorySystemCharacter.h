@@ -86,6 +86,7 @@ public:
 
 	void UpdateInteractionWidget() const;
 
+	void DropItem(UItemBase* ItemToDrop, const int32 QuantityToDrop );
 
 	UPROPERTY(VisibleAnywhere,Category="Character | Interaction")
 	TScriptInterface<IInteractionInterface> TargetInteractable;
@@ -101,7 +102,9 @@ public:
 
 	FInteractionData InteractionData;
 
+	void ToggleMeun();
 
+	
 	void PerformInteractionCheck();
 	void FoundInteractable(AActor* NewInteractable);
 	void NoInteractableFound();

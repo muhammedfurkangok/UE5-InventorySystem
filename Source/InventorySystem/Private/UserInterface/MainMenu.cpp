@@ -1,5 +1,7 @@
 #include  "UserInterface/MainMenu.h"
 
+#include "UserInterface/Inventory/ItemDragDropOperation.h"
+
 
 void UMainMenu::NativeOnInitialized()
 {
@@ -13,8 +15,14 @@ void UMainMenu::NativeConstruct()
 	PlayerCharacter = Cast<AInventorySystemCharacter>(GetOwningPlayerPawn());
 }
 
-bool UMainMenu::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent,
-	UDragDropOperation* InOperation)
+bool UMainMenu::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
-	return Super::NativeOnDrop(InGeometry, InDragDropEvent, InOperation);
+	const UItemDragDropOperation* ItemDragDrop = Cast<UItemDragDropOperation>(InOperation);
+
+	if (PlayerCharacter && ItemDragDrop->SourceItem)
+	{
+		PlayerCharacter->DropItem(ItemDragDrop->SourceItem);
+		return true;
+	}
+	return false;
 }

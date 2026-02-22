@@ -55,6 +55,26 @@ void AInventoryHUD::HideMenu()
     }
 }
 
+void AInventoryHUD::ToggleMenu()
+{
+    if (MainMenuWidget)
+    {
+        HideMenu();
+
+
+        const FInputModeGameOnly InputMode;
+        GetOwningPlayerController()->SetInputMode(InputMode);
+        GetOwningPlayerController()->SetShowMouseCursor(false);
+    }
+    else
+    {
+         DisplayMenu();
+        const FInputModeGameAndUI InputMode;
+        GetOwningPlayerController()->SetInputMode(InputMode);
+        GetOwningPlayerController()->SetShowMouseCursor(true);
+    }
+}
+
 void AInventoryHUD::ShowInteractionWidget() const
 {
     if (InteractionWidget)
