@@ -1,31 +1,25 @@
 # UE5 Inventory System
 
-This project aims to develop **Items**, **Interaction**, and **Inventory** systems in Unreal Engine 5 (UE5) using C++. The main purpose of this repository is to practice feature development in UE5 with C++.
+This repository contains the C++ source code for a custom **Items**, **Interaction**, and **Inventory** system built for Unreal Engine 5. I created this project primarily to practice and demonstrate gameplay feature development using C++ in UE5.
 
 ## Features
 
-- **Items**
-  - Item definition and management (To be developed)
-- **Interaction** ✅
-  - Player interaction with objects
-  - Interaction system is completed
-- **Inventory** 🟦
-  - Inventory management (To-Do)
+- **Items** 
+  - Base item definitions, data structures, and management logic.
+- **Interaction** 
+  - System for the player character to detect and interact with world objects.
+- **Inventory** 
+  - Core inventory management, including adding/removing items and handling capacity.
 
 ## Status
 
 | System       | Status        |
 |--------------|--------------|
-| Items        | ⬜ To-Do      |
+| Items        | ✅ Completed  |
 | Interaction  | ✅ Completed  |
-| Inventory    | ⬜ To-Do      |
+| Inventory    | ✅ Completed  |
 
 ## Purpose
 
-- Practice developing game mechanics and systems in UE5 using C++.
-- Experiment with inventory and interaction systems.
-
-## Notes
-
-- The main goal of the project is to gain experience with C++ in UE5.
-- All systems and code are written in C++.
+- Practice structuring game mechanics and systems in UE5 using C++.
+- Gain hands-on experience building foundational gameplay systems (Inventory & Interaction) entirely from scratch in code.
