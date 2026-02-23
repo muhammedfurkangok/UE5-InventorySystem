@@ -9,7 +9,9 @@
 // engine
 #include "Components/Border.h"
 #include "Components/Image.h"
+#include "Components/InventoryComponent.h"
 #include "Components/TextBlock.h"
+#include "UserInterface/Inventory/InventorySubmenu.h"
 
 void UInventoryItemSlot::NativeOnInitialized()
 {
@@ -128,10 +130,10 @@ void UInventoryItemSlot::NativeOnDragDetected(const FGeometry& InGeometry, const
 	if (DragItemVisualClass)
 	{
 		const TObjectPtr<UDragItemVisual> DragVisual = CreateWidget<UDragItemVisual>(this, DragItemVisualClass);
-		DragVisual->ItemIcon->SetBrushFromTexture(InternalItemReference->AssetData.Icon);
+		DragVisual->ItemIcon->SetBrushFromTexture(InternalItemReference->ItemAssetData.Icon);
 		DragVisual->ItemBorder->SetBrushColor(ItemBorder->GetBrushColor());
 
-		InternalItemReference->NumericData.bIsStackable
+		InternalItemReference->ItemNumericData.bIsStackable
 			? DragVisual->ItemQuantity->SetText(FText::AsNumber(InternalItemReference->Quantity))
 			: DragVisual->ItemQuantity->SetVisibility(ESlateVisibility::Collapsed);
 

@@ -8,7 +8,7 @@ UItemBase::UItemBase()
 {
 }
 
-UItemBase* CreateItemCopy(const UItemBase* ItemToCopy, UObject* NewOuter)
+UItemBase* UItemBase::CreateItemCopy(const UItemBase* ItemToCopy, UObject* NewOuter)
 {
 	UItemBase* ItemCopy = NewObject<UItemBase>(NewOuter, ItemToCopy->GetClass());
 
@@ -23,6 +23,9 @@ UItemBase* CreateItemCopy(const UItemBase* ItemToCopy, UObject* NewOuter)
 
 	return ItemCopy;
 }
+
+
+
 
 
 void UItemBase::SetQuantity(const int32 NewQuantity)

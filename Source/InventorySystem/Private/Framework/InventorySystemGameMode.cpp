@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #include "InventorySystem/Public/Framework/InventorySystemGameMode.h"
 #include "InventorySystem/Public/Player/InventorySystemCharacter.h"
 #include "UObject/ConstructorHelpers.h"

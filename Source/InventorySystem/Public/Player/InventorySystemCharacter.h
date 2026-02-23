@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -75,14 +73,13 @@ class AInventorySystemCharacter : public ACharacter
 public:
 	AInventorySystemCharacter();
 
-	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
-	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); }
 
-	FORCEINLINE UInventoryComponent* GetPlayerInventory() const { return PlayerInventory; }
+	FORCEINLINE UInventoryComponent* GetInventory() const { return PlayerInventory; }
+	FORCEINLINE AInventoryHUD* GetHUD() const { return InventoryHUD; }
 
 	void UpdateInteractionWidget() const;
 
@@ -104,6 +101,14 @@ public:
 
 	void ToggleMeun();
 
+	void Aim();
+	void StopAiming();
+
+	UFUNCTION()
+	void UpdateCameraTimeline(const float TimelineValue) const;
+
+	UFUNCTION()
+	void CameraTimelineEnd() const;
 	
 	void PerformInteractionCheck();
 	void FoundInteractable(AActor* NewInteractable);

@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -17,10 +15,6 @@ class INVENTORYSYSTEM_API APickup : public AActor, public IInteractionInterface
 	GENERATED_BODY()
 
 public:
-	//Properties&Variables
-
-
-	//Funtions
 	APickup();
 	void InitializePickup(const TSubclassOf<UItemBase> BaseClass, const int32 InQuantity);
 
@@ -32,7 +26,6 @@ public:
 	virtual void EndFocus() override;
 
 protected:
-	//Properties&Variables
 	UPROPERTY(VisibleAnywhere, Category="Pickup | Components")
 	UStaticMeshComponent* PickUpMesh;
 	
@@ -51,7 +44,6 @@ protected:
 	UPROPERTY(VisibleInstanceOnly, Category="Pickup | Interaction")
 	FInteractableData InstanceInteractableData;
 	
-	//Funtions
 	virtual void BeginPlay() override;
 
 	virtual void Interact(AInventorySystemCharacter* PlayerCharacter) override;

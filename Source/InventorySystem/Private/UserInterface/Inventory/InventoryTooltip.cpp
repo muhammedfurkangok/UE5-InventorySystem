@@ -1,5 +1,4 @@
 #include "UserInterface/Inventory/InventoryTooltip.h"
-
 #include "Components/TextBlock.h"
 #include "UserInterface/Inventory/InventoryItemSlot.h"
 #include "Items/ItemBase.h"

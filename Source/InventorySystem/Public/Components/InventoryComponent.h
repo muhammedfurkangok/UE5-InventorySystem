@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -27,13 +25,10 @@ struct FItemAddResult
 	ResultMessage(FText::GetEmpty())
 	{};
 
-	//Act amount of items that were actually added to the inventory
 	UPROPERTY(BlueprintReadOnly, Category= "Item Add Result")
 	int32 ActualAmountAdded;
-	//Enum represeting the end state off an add item operation
 	UPROPERTY(BlueprintReadOnly, Category= "Item Add Result")
 	EItemAddResult OperationResult;
-	//A message describing the result of the add item operation
 	UPROPERTY(BlueprintReadOnly ,Category= "Item Add Result")
 	FText ResultMessage;
 	
@@ -91,11 +86,9 @@ public:
 	UItemBase* FindNextItemByID(const TObjectPtr<UItemBase>& ItemIn) const;
 	UItemBase* FindNextPartialStack(const TObjectPtr<UItemBase>& ItemIn) const;
 	
-	/** @brief Merges quantities of two items together that are already in the inventory.*/
 	void MergeItems(const TObjectPtr<UItemBase>& TargetItem, const TObjectPtr<UItemBase>& SourceItem);
 	void HandleRemoveItem(UItemBase* ItemToRemove, int32 AmountToRemove = 0, const bool bAdjustWeight = true);
 	
-	/** @brief Used to split an existing stack. Reduces the target stack quantity and adds the split amount as a new item.*/
 	void SplitExistingStack(UItemBase* ItemIn, const int32 AmountToSplit);
 	
 	FORCEINLINE TArray<UItemBase*> GetInventoryContents() const { return InventoryContents; }

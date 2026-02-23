@@ -1,8 +1,6 @@
 #include "World/Pickup.h"
-
 #include "Items/ItemBase.h"
 #include "Player/InventorySystemCharacter.h"
-#include "UserInterface/Inventory/InventoryPanel.h"
 
 APickup::APickup()
 {
@@ -97,7 +95,7 @@ void APickup::TakePickup(const AInventorySystemCharacter* Taker)
 	{
 		if (ItemReference)
 		{
-			if (UInventoryComponent* PlayerInventory = Taker->GetPlayerInventory())
+			if (UInventoryComponent* PlayerInventory = Taker->GetInventory())
 			{
 				const FItemAddResult AddResult = PlayerInventory->HandleAddItem(ItemReference);
 

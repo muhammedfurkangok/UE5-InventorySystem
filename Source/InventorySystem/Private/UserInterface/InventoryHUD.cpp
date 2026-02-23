@@ -2,7 +2,6 @@
 #include "Blueprint/UserWidget.h"
 
 
-
 AInventoryHUD::AInventoryHUD()
 {
 }

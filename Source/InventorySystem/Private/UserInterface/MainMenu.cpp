@@ -1,5 +1,5 @@
 #include  "UserInterface/MainMenu.h"
-
+#include "Items/ItemBase.h"
 #include "UserInterface/Inventory/ItemDragDropOperation.h"
 
 
@@ -21,7 +21,7 @@ bool UMainMenu::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& 
 
 	if (PlayerCharacter && ItemDragDrop->SourceItem)
 	{
-		PlayerCharacter->DropItem(ItemDragDrop->SourceItem);
+		PlayerCharacter->DropItem(ItemDragDrop->SourceItem, ItemDragDrop->SourceItem->Quantity);
 		return true;
 	}
 	return false;
